@@ -6,7 +6,7 @@ ARG TRITON_VERSION=2.19.0
 ARG TRITON_CONTAINER_VERSION=22.02
 
 ARG BASE_IMAGE=ubuntu:20.04
-ARG BUILD_IMAGE=tritonserver_build
+ARG BUILD_IMAGE=kapilvaswani/tritonserver_build:latest
 
 ############################################################################
 ##  Build image
