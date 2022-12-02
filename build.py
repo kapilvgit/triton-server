@@ -781,8 +781,6 @@ SHELL ["cmd", "/S", "/C"]
 # Ensure apt-get won't prompt for selecting options
 ENV DEBIAN_FRONTEND=noninteractive
 
-COPY mitmproxy-ca-cert.crt /usr/local/share/ca-certificates/
-
 # libcurl4-openSSL-dev is needed for GCS
 # python3-dev is needed by Torchvision
 # python3-pip and libarchive-dev is needed by python backend
@@ -1152,7 +1150,7 @@ def container_build(images, backends, repoagents, endpoints):
         base_image = 'nvcr.io/nvidia/tritonserver:{}-py3-min'.format(
             FLAGS.upstream_container_version)
     else:
-        base_image = 'ubuntu:20.04'
+        base_image = 'kapilvaswani/ubuntu-cert:20.04'
 
     dockerfileargmap = {
         'NVIDIA_BUILD_REF':
