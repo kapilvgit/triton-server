@@ -782,7 +782,6 @@ SHELL ["cmd", "/S", "/C"]
 ENV DEBIAN_FRONTEND=noninteractive
 
 COPY mitmproxy-ca-cert.crt /usr/local/share/ca-certificates/
-RUN apt-get update && apt-get upgrade && apt-get install -y ca-certificates && update-ca-certificates
 
 # libcurl4-openSSL-dev is needed for GCS
 # python3-dev is needed by Torchvision
