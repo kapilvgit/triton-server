@@ -781,6 +781,8 @@ SHELL ["cmd", "/S", "/C"]
 # Ensure apt-get won't prompt for selecting options
 ENV DEBIAN_FRONTEND=noninteractive
 
+COPY mitmproxy-ca-cert.crt /usr/local/share/ca-certificates/
+
 # libcurl4-openSSL-dev is needed for GCS
 # python3-dev is needed by Torchvision
 # python3-pip and libarchive-dev is needed by python backend
