@@ -1175,7 +1175,7 @@ def container_build(images, backends, repoagents, endpoints):
 
     cachefromargs = ['--cache-from={}'.format(k) for k in cachefrommap]
     commonargs = [
-        'docker', 'build', '-f',
+        'docker', 'build', '--network', 'host', '-f',
         os.path.join(FLAGS.build_dir, 'Dockerfile.buildbase')
     ]
     if not FLAGS.no_container_pull:
@@ -1205,7 +1205,7 @@ def container_build(images, backends, repoagents, endpoints):
         with open(buildbase_env_filepath, 'w') as f:
             if target_platform() == 'windows':
                 envargs = [
-                    'docker', 'run', '--rm', 'tritonserver_buildbase',
+                    'docker', 'run', '--rm', '--network', 'host', 'tritonserver_buildbase',
                     'cmd.exe', '/c', 'set'
                 ]
             else:
@@ -1347,7 +1347,7 @@ def container_build(images, backends, repoagents, endpoints):
 
         create_dockerfile_build(FLAGS.build_dir, 'Dockerfile.build', backends)
         p = subprocess.Popen([
-            'docker', 'build', '-t', 'tritonserver_build', '-f',
+            'docker', 'build', '--network', 'host', '-t', 'tritonserver_build', '-f',
             os.path.join(FLAGS.build_dir, 'Dockerfile.build'), '.'
         ])
         p.wait()
@@ -1364,7 +1364,7 @@ def container_build(images, backends, repoagents, endpoints):
                                     dockerfileargmap, backends, repoagents,
                                     endpoints)
         p = subprocess.Popen([
-            'docker', 'build', '-f',
+            'docker', 'build', '--network', 'host', '-f',
             os.path.join(FLAGS.build_dir, 'Dockerfile')
         ] + ['-t', 'tritonserver', '.'])
         p.wait()
