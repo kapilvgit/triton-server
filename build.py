@@ -1210,7 +1210,7 @@ def container_build(images, backends, repoagents, endpoints):
                 ]
             else:
                 envargs = [
-                    'docker', 'run', '--rm', 'tritonserver_buildbase', 'env'
+                    'docker', 'run', '--rm', '--network', 'host', 'tritonserver_buildbase', 'env'
                 ]
             log_verbose('buildbase env {}'.format(envargs))
             p = subprocess.Popen(envargs, stdout=f)
@@ -1286,7 +1286,7 @@ def container_build(images, backends, repoagents, endpoints):
         runargs += ['--install-dir', install_dir]
 
         dockerrunargs = [
-            'docker', 'run', '--name', 'tritonserver_builder', '-w',
+            'docker', 'run', '--network', 'host', '--name', 'tritonserver_builder', '-w',
             '/workspace'
         ]
         if target_platform() == 'windows':
